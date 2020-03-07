@@ -1,0 +1,88 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.70'
+    id "org.jetbrains.kotlin.plugin.allopen" version "1.3.70"
+    id "fish.payara.micro-gradle-plugin" version "1.0.3"
+    id "war"
+
+}
+
+group 'app4j'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+repositories {
+    maven {
+        url uri('/Users/bala/projects/repository')
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: '*.jar')
+
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+
+    providedCompile 'jakarta.platform:jakarta.jakartaee-api:8.0.0'
+    providedCompile 'org.eclipse.microprofile:microprofile-spec:3.2'
+    implementation 'org.microprofile-ext:openapi-ext:1.0.3'
+    implementation 'org.microprofile-ext.openapi-ext:swagger-ui:1.0.3'
+
+    implementation(
+            'org.apache.commons:commons-lang3:3.8.1',
+            'commons-io:commons-io:2.6'
+    )
+
+    implementation 'org.jasypt:jasypt:1.9.2'
+    implementation 'org.passay:passay:1.4.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'io.pebbletemplates:pebble:3.0.8'
+
+    implementation 'org.mariadb.jdbc:mariadb-java-client:2.4.2'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+
+payaraMicro {
+    payaraVersion = '5.201'
+    deployWar = false
+    useUberJar = false
+    daemon = false
+    commandLineOptions = ["port": 2468,
+                          "nocluster":"",
+                          "nohostaware":"",
+                          "disablephonehome": "",
+                          "postbootcommandfile":"postboot.txt"
+    ]
+    javaCommandLineOptions = [
+            "Dmp.openapi.scan.disable" : false
+    ]
+}
+
+
+allOpen {
+    annotations(
+            "javax.ws.rs.Path",
+            "javax.enterprise.context.RequestScoped",
+            "javax.enterprise.context.SessionScoped",
+            "javax.enterprise.context.ApplicationScoped",
+            "javax.enterprise.context.Dependent",
+            "javax.ejb.Singleton",
+            "javax.ejb.Stateful",
+            "javax.ejb.Stateless",
+            "javax.faces.view.ViewScoped",
+            "javax.ws.rs.ApplicationPath"
+    )
+}
