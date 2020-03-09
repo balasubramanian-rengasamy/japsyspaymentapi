@@ -1,0 +1,5 @@
+gradle build
+
+scp build/libs/*.war \
+    ftpuser@kotlinee.org:/home/ftpuser
+

@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
-gradle microBundle
+gradle build
 
-java -jar build/libs/kotlinee-template-1.0-microbundle.jar \
+java -jar  ~/projects/payara-micro-5.201.jar \
+--deploy build/libs/japsysapi-1.0.war \
 --port 2499 \
---postbootcommandfile postboot.txt
---unpackdir /tmp/payara
+--unpackdir /tmp/payara \
+--nohostaware \
+--nocluster
+

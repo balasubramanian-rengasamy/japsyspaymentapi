@@ -7,7 +7,7 @@ plugins {
 
 }
 
-group 'app4j'
+group 'japsysapi'
 version '1.0'
 
 sourceCompatibility = 1.8
@@ -17,9 +17,6 @@ repositories {
 }
 
 repositories {
-    maven {
-        url uri('/Users/bala/projects/repository')
-    }
 }
 
 dependencies {
@@ -32,13 +29,18 @@ dependencies {
     providedCompile 'jakarta.platform:jakarta.jakartaee-api:8.0.0'
     providedCompile 'org.eclipse.microprofile:microprofile-spec:3.2'
     implementation 'org.microprofile-ext:openapi-ext:1.0.3'
-    implementation 'org.microprofile-ext.openapi-ext:swagger-ui:1.0.3'
+    implementation 'org.microprofile-ext.openapi-ext:openapi-ui:1.1.2'
+    implementation 'org.microprofile-ext.jaxrs-ext:configurable-exception-handler:1.0.0'
 
     implementation(
             'org.apache.commons:commons-lang3:3.8.1',
-            'commons-io:commons-io:2.6'
+            'commons-io:commons-io:2.6',
+            'org.tinylog:tinylog-api-kotlin:2.0.1',
+            'org.tinylog:tinylog-impl:2.0.1',
+            'org.tinylog:slf4j-tinylog:2.0.1'
     )
 
+    implementation 'joda-time:joda-time:2.10.1'
     implementation 'org.jasypt:jasypt:1.9.2'
     implementation 'org.passay:passay:1.4.0'
     implementation 'com.google.code.gson:gson:2.8.5'
